@@ -14,7 +14,7 @@ export const ArrowButtonStory: Story = {
 		return (
 			<>
 				<ArrowButton
-					menuShown={false}
+					isMenuShown={false}
 					onClick={() => alert('Открытие / закрытие меню')}
 				/>
 			</>

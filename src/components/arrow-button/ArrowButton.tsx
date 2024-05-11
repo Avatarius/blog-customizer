@@ -7,11 +7,11 @@ import clsx from 'clsx';
 export type OnClick = () => void;
 
 interface IArrowButtonProps {
-	menuShown: boolean;
+	isMenuShown: boolean;
 	onClick: OnClick;
 }
 
-export const ArrowButton = ({ menuShown, onClick }: IArrowButtonProps) => {
+export const ArrowButton = ({ isMenuShown, onClick }: IArrowButtonProps) => {
 	return (
 		/* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
 		<div
@@ -21,14 +21,14 @@ export const ArrowButton = ({ menuShown, onClick }: IArrowButtonProps) => {
 			onClick={onClick}
 			className={clsx({
 				[styles.container]: true,
-				[styles.container_open]: menuShown,
+				[styles.container_open]: isMenuShown,
 			})}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'
 				className={clsx({
 					[styles.arrow]: true,
-					[styles.arrow_open]: menuShown,
+					[styles.arrow_open]: isMenuShown,
 				})}
 			/>
 		</div>

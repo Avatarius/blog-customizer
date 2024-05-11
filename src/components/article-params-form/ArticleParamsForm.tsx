@@ -20,13 +20,9 @@ import { Select } from '../select';
 import { RadioGroup } from '../radio-group';
 import { Separator } from '../separator';
 
-interface IStyle {
-	fontFamilyOption: string;
-	fontSizeOption: string;
-	fontColor: string;
-	contentWidth: string;
-	backgroundColor: string;
-}
+type IStyle = {
+	[K in keyof ArticleStateType]: string;
+};
 
 interface IArticleParamsFormProps {
 	setPageStyle: Dispatch<SetStateAction<IStyle>>;

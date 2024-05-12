@@ -1,7 +1,7 @@
 import { Button } from 'components/button';
 
 import styles from './ArticleParamsForm.module.scss';
-import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useRef, useState } from 'react';
 import clsx from 'clsx';
 import {
 	FormTitles,
@@ -19,6 +19,7 @@ import { Text } from '../text';
 import { Select } from '../select';
 import { RadioGroup } from '../radio-group';
 import { Separator } from '../separator';
+import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 
 type IStyle = {
 	[K in keyof ArticleStateType]: string;
@@ -33,6 +34,15 @@ export const ArticleParamsForm = ({
 }: IArticleParamsFormProps) => {
 	const [isMenuShown, setIsMenuShown] = useState(false);
 	const [formState, setFormState] = useState(defaultArticleState);
+	const asideRef = useRef<HTMLElement | null>(null);
+	const arrowButtonRef = useRef<HTMLDivElement | null>(null);
+
+	useOutsideClickClose({
+		asideRef,
+		arrowButtonRef,
+		isMenuShown,
+		setIsMenuShown,
+	});
 
 	function handleChange(type: keyof ArticleStateType, value: OptionType) {
 		setFormState((prev) => ({
@@ -68,12 +78,14 @@ export const ArticleParamsForm = ({
 			<ArrowButton
 				isMenuShown={isMenuShown}
 				onClick={() => setIsMenuShown((prev) => !prev)}
+				arrowButtonRef={arrowButtonRef}
 			/>
 			<aside
 				className={clsx({
 					[styles.container]: true,
 					[styles.container_open]: isMenuShown,
-				})}>
+				})}
+				ref={asideRef}>
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<Text as='h2' size={31} weight={800} uppercase>
 						Задайте параметры

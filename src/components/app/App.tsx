@@ -1,5 +1,4 @@
 import styles from './App.module.scss';
-import clsx from 'clsx';
 import { defaultArticleState } from 'src/constants/articleProps';
 import { CSSProperties, useState } from 'react';
 import { ArticleParamsForm } from '../article-params-form';
@@ -15,7 +14,7 @@ export const App = () => {
 	});
 	return (
 		<div
-			className={clsx(styles.main)}
+			className={styles.main}
 			style={
 				{
 					'--font-family': pageStyle.fontFamilyOption,
